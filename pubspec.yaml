@@ -84,6 +84,11 @@ flutter:
   assets:
     - assets/images/
     - assets/images/team.png
+    - lib/lang/en.json
+    - lib/lang/fa.json
+    - lib/lang/ar.json
+    - lib/lang/hi.json
+
 
   # assets:
   #  - images/a_dot_burr.jpeg

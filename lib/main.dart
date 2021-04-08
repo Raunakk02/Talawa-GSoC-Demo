@@ -1,9 +1,12 @@
 //Flutter Packages are imported here
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 //Pages are imported here
 import 'package:provider/provider.dart';
+import 'package:talawa/localization/app_localization.dart';
+import 'package:talawa/localization/supported_locales.dart';
 import 'package:talawa/services/preferences.dart';
 import 'package:talawa/utils/GQLClient.dart';
 import 'package:talawa/views/pages/_pages.dart';
@@ -36,8 +39,25 @@ Future<void> main() async {
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  static void setLocale(BuildContext context,Locale locale){
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
+    state.setLocale(locale);
+  }
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  Locale _locale = Locale('en','US');
+
+  void setLocale(Locale locale){
+    setState(() {
+          _locale = locale; 
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +92,24 @@ class MyApp extends StatelessWidget {
           };
           WidgetBuilder builder = routes[settings.name];
           return MaterialPageRoute(builder: (ctx) => builder(ctx));
+        },
+        locale: _locale,
+        supportedLocales: SupportedLocales.locales,
+        localizationsDelegates: [
+          AppLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (deviceLocale, supportedLocales){
+          Locale retLocale = supportedLocales.first;
+          supportedLocales.forEach((e) { 
+            if(e.languageCode == deviceLocale.languageCode &&
+               e.countryCode == deviceLocale.countryCode){
+                 retLocale = e;
+               }
+          });
+          return retLocale;
         },
         home: userID == null ? UrlPage() : HomePage(), //checking weather the user is logged in or not
       ),

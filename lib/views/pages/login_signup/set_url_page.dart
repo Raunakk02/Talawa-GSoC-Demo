@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:talawa/localization/app_localization.dart';
 import 'package:talawa/services/preferences.dart';
 import 'package:talawa/utils/uidata.dart';
 import 'package:talawa/utils/validator.dart';
 import 'package:http/http.dart' as http;
 import 'package:talawa/views/pages/login_signup/login_page.dart';
 import 'package:talawa/views/pages/login_signup/register_page.dart';
+import 'package:talawa/views/widgets/change_lang_dropdown.dart';
 
 class UrlPage extends StatefulWidget {
   @override
@@ -269,7 +271,8 @@ class _UrlPageState extends State<UrlPage> with TickerProviderStateMixin<UrlPage
                                 onChanged: (String newValue) {
                                   setState(() {
                                     dropdownValue = newValue;
-                                    saveMsg = 'Set URL';
+                                    // saveMsg = 'Set URL';
+                                    saveMsg = AppLocalization.of(context).getTranslatedValue('set_url');
                                   });
                                 },
                                 items: <String>[
@@ -310,7 +313,8 @@ class _UrlPageState extends State<UrlPage> with TickerProviderStateMixin<UrlPage
                                         ),
                                         prefixIcon: Icon(Icons.web,
                                             color: Colors.white),
-                                        labelText: "Type Org URL Here",
+                                        labelText: AppLocalization.of(context).getTranslatedValue('org_url_label'),
+                                        // labelText: "Type Org URL Here",
                                         labelStyle:
                                             TextStyle(color: Colors.white),
                                         alignLabelWithHint: true,
@@ -413,7 +417,8 @@ class _UrlPageState extends State<UrlPage> with TickerProviderStateMixin<UrlPage
                                   children: <Widget>[
                                     new Expanded(
                                       child: Text(
-                                        "Create an Account",
+                                        // "Create an Account",
+                                        AppLocalization.of(context).getTranslatedValue('create_an_account'),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           //color: UIData.quitoThemeColor,
@@ -480,7 +485,8 @@ class _UrlPageState extends State<UrlPage> with TickerProviderStateMixin<UrlPage
                                   children: <Widget>[
                                     new Expanded(
                                       child: Text(
-                                        "Login",
+                                        // "Login",
+                                        AppLocalization.of(context).getTranslatedValue('login'),                                        
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           //color: UIData.quitoThemeColor,
@@ -511,6 +517,7 @@ class _UrlPageState extends State<UrlPage> with TickerProviderStateMixin<UrlPage
       //resizeToAvoidBottomInset: false,
       key: _scaffoldkey,
       backgroundColor: Colors.white,
+      floatingActionButton: ChangeLangDropdown(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
