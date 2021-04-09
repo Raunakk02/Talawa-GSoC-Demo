@@ -7,7 +7,7 @@ import 'package:talawa/utils/validator.dart';
 import 'package:http/http.dart' as http;
 import 'package:talawa/views/pages/login_signup/login_page.dart';
 import 'package:talawa/views/pages/login_signup/register_page.dart';
-import 'package:talawa/views/widgets/change_lang_dropdown.dart';
+import 'package:talawa/views/widgets/switch_language_button.dart';
 
 class UrlPage extends StatefulWidget {
   @override
@@ -517,7 +517,7 @@ class _UrlPageState extends State<UrlPage> with TickerProviderStateMixin<UrlPage
       //resizeToAvoidBottomInset: false,
       key: _scaffoldkey,
       backgroundColor: Colors.white,
-      floatingActionButton: ChangeLangDropdown(),
+      floatingActionButton: SwitchLanguageButton(),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
