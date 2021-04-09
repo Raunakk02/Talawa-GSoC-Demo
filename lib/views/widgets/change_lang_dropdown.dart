@@ -5,15 +5,28 @@ class ChangeLangDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
+      key: Key('change_lang_dropdown'),
       icon: Icon(Icons.language),
       underline: null,
       items: [
-        DropdownMenuItem(child: Text('English'),value: const Locale('en','US'),),
-        DropdownMenuItem(child: Text('Persian'),value: const Locale('fa','IR'),),
-        DropdownMenuItem(child: Text('Arabic'),value: const Locale('ar','SA'),),
-        DropdownMenuItem(child: Text('Hindi'),value: const Locale('hi','IN'),),
+        DropdownMenuItem(
+          child: Text('English'),
+          value: const Locale('en', 'US'),
+        ),
+        DropdownMenuItem(
+          child: Text('Persian'),
+          value: const Locale('fa', 'IR'),
+        ),
+        DropdownMenuItem(
+          child: Text('Arabic'),
+          value: const Locale('ar', 'SA'),
+        ),
+        DropdownMenuItem(
+          child: Text('Hindi'),
+          value: const Locale('hi', 'IN'),
+        ),
       ],
-      onChanged: (locale){
+      onChanged: (locale) {
         MyApp.setLocale(context, locale);
       },
     );
