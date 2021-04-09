@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:talawa/main.dart';
 
-class ChangeLangDropdown extends StatelessWidget {
+void defaultSwitchLocale(Locale _locale) {}
+
+class ChangeLangDropdown extends StatefulWidget {
+  ChangeLangDropdown({this.isTest = false, this.switchLocale = defaultSwitchLocale});
+
+  final bool isTest;
+  final void Function(Locale _locale) switchLocale;
+
+  @override
+  _ChangeLangDropdownState createState() => _ChangeLangDropdownState();
+}
+
+class _ChangeLangDropdownState extends State<ChangeLangDropdown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
@@ -27,7 +39,11 @@ class ChangeLangDropdown extends StatelessWidget {
         ),
       ],
       onChanged: (locale) {
-        MyApp.setLocale(context, locale);
+        if (widget.isTest) {
+          widget.switchLocale(locale);
+        } else {
+          MyApp.setLocale(context, locale);
+        }
       },
     );
   }
